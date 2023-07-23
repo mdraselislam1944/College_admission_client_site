@@ -16,6 +16,7 @@ const AdmitClass = () => {
             phone:form.phone.value,
             address:form.address.value,
             image:form.image.value,
+            date:form.date.value,
             id:id,
         }
         const imageFile = form.image.files[0];
@@ -28,7 +29,7 @@ const AdmitClass = () => {
             .then((response) => response.json())
             .then((data) => {
                 admission.image = data.data.display_url;
-                fetch("http://localhost:4000/studentsAdd",{
+                fetch("https://mr-college-server.vercel.app/studentsAdd",{
                     method:"POST",
                     headers:{
                         "content-type":"application/json",
@@ -46,7 +47,7 @@ const AdmitClass = () => {
                 })
             }
         );
-        console.log(admission);
+        // console.log(admission);
     }
     return (
         <div className='mx-auto my-10'>
@@ -62,7 +63,7 @@ const AdmitClass = () => {
                 </div>
                 <div className='flex items-center justify-center gap-3 my-3'>
                     <input required type="text" name="address" id="address" placeholder='enter Candidate address' className="input input-bordered w-full max-w-xs" />
-                    <input required type="date" name="date" id="date" placeholder='enter Candidate date of birth' className="input input-bordered w-full max-w-xs" />
+                    <input  required type="date" name="date" id="date" placeholder='enter Candidate date of birth' className="input input-bordered w-full max-w-xs" />
                 </div>
                 <div className='flex items-center justify-center gap-3 my-3'>
                 <input required type="file" name="image" id="image" placeholder='enter Candidate image' className="input input-bordered w-full max-w-xs" />

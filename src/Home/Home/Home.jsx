@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
+import GraduatedImage from '../GraduatedImage';
+import Review from '../Review';
 
 const Home = () => {
     const college = useLoaderData();
     // console.log(college);
     return (
         <div>
-            <div className='grid grid-cols-1 lg:grid-cols-3 lg:ms-[5vw] my-5'>
+            <div className='grid grid-cols-1 lg:grid-cols-3 lg:ms-[5vw] my-5 ms-10'>
                 {
                     college.map(college => <div key={college._id} className="card w-96 glass">
                         <figure><img src={college.image} alt="car!" /></figure>
@@ -46,6 +48,8 @@ const Home = () => {
                     </div>)
                 }
             </div>
+            <GraduatedImage/>
+            <Review/>
         </div>
     );
 };

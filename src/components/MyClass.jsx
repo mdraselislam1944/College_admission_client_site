@@ -1,23 +1,25 @@
 import { Result } from 'postcss';
-import React, { useEffect, useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../Pages/Authentication/AuthProviders';
 
 const MyClass = () => {
     let filterCLass;
+    const {user}=useContext(AuthContext);
     const [data, setData] = useState();
     useEffect(() => {
-        fetch('http://localhost:4000/studentsClass/mdraselislam1944@gmail.com')
+        fetch(`https://mr-college-server.vercel.app/studentsClass/${user?.email}`)
             .then(res => res.json())
             .then(result => {
                 setData(result);
             })
     }, [])
     const college = useLoaderData();
-    console.log(college);
+    // console.log(college);
     if (data) {
         filterCLass = college.find(college => college._id == data[0]?.id);
     }
-    console.log(filterCLass);
+    // console.log(filterCLass);
     return (
         <div>
             {
@@ -66,8 +68,9 @@ const MyClass = () => {
                                     </li>
                                 </div>)
                             }
-                            <div className="card-actions justify-end">
-                                <button className="btn btn-primary">Admit</button>
+                            <div className="card-actions justify-end mx-auto">
+                            <Link to={`/feedback/${filterCLass._id}`}  className="btn btn-info">Reviews</Link>
+                                <button className="btn btn-info">Admit</button>
                             </div>
                         </div>
                     </div>
